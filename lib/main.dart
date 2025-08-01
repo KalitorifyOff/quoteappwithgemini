@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:streakdemo/core/database/database_helper.dart';
+import 'package:streakdemo/core/database/repositories/category_repository.dart';
 import 'package:streakdemo/core/database/repositories/quote_repository.dart';
 import 'package:streakdemo/core/theme/app_theme.dart';
+import 'package:streakdemo/features/categories/bloc/category_bloc.dart';
+import 'package:streakdemo/features/categories/presentation/category_page.dart';
 import 'package:streakdemo/features/quote_of_the_day/bloc/quote_of_the_day_bloc.dart';
 import 'package:streakdemo/features/quote_of_the_day/presentation/quote_of_the_day_page.dart';
 import 'package:streakdemo/features/quote_feed/bloc/quote_feed_bloc.dart';
@@ -19,6 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final DatabaseHelper databaseHelper = DatabaseHelper();
     final QuoteRepository quoteRepository = QuoteRepository(databaseHelper);
+    final CategoryRepository categoryRepository = CategoryRepository(databaseHelper);
 
     return MultiBlocProvider(
       providers: [
@@ -27,6 +31,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<QuoteFeedBloc>(
           create: (context) => QuoteFeedBloc(quoteRepository: quoteRepository),
+        ),
+        BlocProvider<CategoryBloc>(
+          create: (context) => CategoryBloc(categoryRepository: categoryRepository),
         ),
       ],
       child: MaterialApp(
@@ -53,6 +60,7 @@ class _HomePageState extends State<HomePage> {
   static const List<Widget> _widgetOptions = <Widget>[
     QuoteOfTheDayPage(),
     QuoteFeedPage(),
+    CategoryPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -76,6 +84,10 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.list),
             label: 'Feed',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.category),
+            label: 'Categories',
           ),
         ],
         currentIndex: _selectedIndex,
