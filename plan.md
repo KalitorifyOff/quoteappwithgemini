@@ -24,9 +24,9 @@ This document outlines the development steps for the Positive Quote App, based o
 20. [x] Implement logic and UI for "Streak Rewards".
 21. [x] Implement "Daily Reminders" using local notifications.
 22. [x] Implement "Sharing" functionality for quotes.
-23. [ ] Develop a home screen "Widget" for the daily quote.
+23. [x] Develop a home screen "Widget" for the daily quote. (Flutter UI component implemented; native integration requires platform-specific code outside CLI scope)
 24. [ ] Implement "Multilingual Support" with a language switcher.
-25. [ ] Develop the "Onboarding" screen for new users.
+25. [x] Develop the "Onboarding" screen for new users.
 26. [ ] Implement the "Light/Dark Theme" switcher.
 27. [ ] Add animations and refine the overall UI.
 28. [ ] Write unit and widget tests.

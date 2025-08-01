@@ -11,21 +11,33 @@ import 'package:streakdemo/features/quote_of_the_day/presentation/quote_of_the_d
 import 'package:streakdemo/features/quote_feed/bloc/quote_feed_bloc.dart';
 import 'package:streakdemo/features/quote_feed/presentation/quote_feed_page.dart';
 import 'package:streakdemo/core/services/notification_service.dart';
+import 'package:streakdemo/features/onboarding/presentation/onboarding_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:streakdemo/features/streak_management/bloc/streak_bloc.dart';
+import 'package:streakdemo/core/database/repositories/user_streak_repository.dart';
+import 'package:streakdemo/features/user_content/bloc/user_content_bloc.dart';
+import 'package:streakdemo/features/user_content/presentation/user_quotes_page.dart';
+import 'package:streakdemo/features/user_content/presentation/user_categories_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService().init();
-  runApp(const MyApp());
+  final prefs = await SharedPreferences.getInstance();
+  final bool hasCompletedOnboarding = prefs.getBool('hasCompletedOnboarding') ?? false;
+  runApp(MyApp(hasCompletedOnboarding: hasCompletedOnboarding));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool hasCompletedOnboarding;
+
+  const MyApp({super.key, required this.hasCompletedOnboarding});
 
   @override
   Widget build(BuildContext context) {
     final DatabaseHelper databaseHelper = DatabaseHelper();
     final QuoteRepository quoteRepository = QuoteRepository(databaseHelper);
     final CategoryRepository categoryRepository = CategoryRepository(databaseHelper);
+    final UserStreakRepository userStreakRepository = UserStreakRepository(databaseHelper);
 
     return MultiBlocProvider(
       providers: [
@@ -38,13 +50,22 @@ class MyApp extends StatelessWidget {
         BlocProvider<CategoryBloc>(
           create: (context) => CategoryBloc(categoryRepository: categoryRepository),
         ),
+        BlocProvider<UserContentBloc>(
+          create: (context) => UserContentBloc(
+            quoteRepository: quoteRepository,
+            categoryRepository: categoryRepository,
+          ),
+        ),
+        BlocProvider<StreakBloc>(
+          create: (context) => StreakBloc(userStreakRepository: userStreakRepository),
+        ),
       ],
       child: MaterialApp(
         title: 'Positive Quote App',
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.system, // Automatically switch between light and dark theme
-        home: const HomePage(),
+        home: hasCompletedOnboarding ? const HomePage() : const OnboardingPage(),
       ),
     );
   }
@@ -64,6 +85,9 @@ class _HomePageState extends State<HomePage> {
     QuoteOfTheDayPage(),
     QuoteFeedPage(),
     CategoryPage(),
+    UserQuotesPage(),
+    UserCategoriesPage(),
+    SettingsPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -93,12 +117,21 @@ class _HomePageState extends State<HomePage> {
             label: 'Categories',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.format_quote),
+            label: 'My Quotes',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.folder),
+            label: 'My Categories',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Theme.of(context).primaryColor,
+        unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
       ),
     );
