@@ -40,7 +40,7 @@ The target audience for this application includes:
 *   **Daily Reminders:** Users can opt-in to receive daily push notifications to remind them to check their daily quote and maintain their streak.
 *   **Sharing:** Users can share their favorite quotes with friends and family via social media, messaging apps, or email.
 *   **Widgets:** Home screen widgets to display the daily quote.
-*   **Multilingual Support:** The app will support multiple languages.
+*   **Multilingual Support:** The app will support the following languages: English (Primary), Tamil, Malayalam, Kannada, and Hindi.
 
 ## 5. User Interface and User Experience (UI/UX)
 

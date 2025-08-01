@@ -5,8 +5,8 @@ This document outlines the development steps for the Positive Quote App, based o
 1. [x] Initialize Flutter project for Android.
 2. [x] Add necessary dependencies to `pubspec.yaml` (`flutter_bloc`, `equatable`, `sqflite`/`hive`, `path_provider`, `intl`, `flutter_localizations`, `share_plus`, `flutter_local_notifications`).
 3. [x] Set up the feature-first project structure.
-4. [ ] Configure the soft and cream color palette for both light and dark themes.
-5. [ ] Set up internationalization (i18n) with initial language files.
+4. [x] Configure the soft and cream color palette for both light and dark themes.
+5. [ ] Set up internationalization (i18n) with initial language files (en, ta, ml, kn, hi).
 6. [ ] Define the database schema for quotes, categories, and user data.
 7. [ ] Implement the database helper/service class.
 8. [ ] Create `Quote` and `Category` models.
