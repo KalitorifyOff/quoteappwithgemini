@@ -4,7 +4,7 @@ abstract class StreakState extends Equatable {
   const StreakState();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class StreakInitial extends StreakState {}

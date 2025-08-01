@@ -20,7 +20,7 @@ This document outlines the development steps for the Positive Quote App, based o
 16. [x] Develop UI for creating, editing, and managing user quotes.
 17. [x] Develop UI for creating, editing, and managing user categories.
 18. [x] Implement BLoC and logic for "Streak Management".
-19. [ ] Develop UI to display the streak counter.
+19. [x] Develop UI to display the streak counter.
 20. [ ] Implement logic and UI for "Streak Rewards".
 21. [ ] Implement "Daily Reminders" using local notifications.
 22. [ ] Implement "Sharing" functionality for quotes.
