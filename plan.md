@@ -16,7 +16,7 @@ This document outlines the development steps for the Positive Quote App, based o
 12. [ ] Implement BLoC and UI for "Quote Categories".
 13. [ ] Implement BLoC and UI for the "Favorites" feature.
 14. [ ] Implement BLoC and UI for the "Search" functionality.
-15. [ ] Implement BLoC for managing user-created quotes and categories.
+15. [x] Implement BLoC for managing user-created quotes and categories.
 16. [ ] Develop UI for creating, editing, and managing user quotes.
 17. [ ] Develop UI for creating, editing, and managing user categories.
 18. [ ] Implement BLoC and logic for "Streak Management".
