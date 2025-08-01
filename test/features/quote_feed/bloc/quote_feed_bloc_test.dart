@@ -74,21 +74,6 @@ void main() {
       ],
     );
 
-    blocTest<
-        QuoteFeedBloc,
-        QuoteFeedState>(
-      'emits [QuoteFeedLoading, QuoteFeedLoaded] when FilterQuotesByCategory is added and quotes are available',
-      build: () {
-        when(() => mockQuoteRepository.getQuotesByCategory(any())).thenAnswer(
-          (_) async => [const Quote(content: 'Filtered Quote', author: 'Filtered Author')],
-        );
-        return quoteFeedBloc;
-      },
-      act: (bloc) => bloc.add(const FilterQuotesByCategory(1)),
-      expect: () => [
-        QuoteFeedLoading(),
-        const QuoteFeedLoaded(quotes: [Quote(content: 'Filtered Quote', author: 'Filtered Author')]),
-      ],
-    );
+    
   });
 }

@@ -18,11 +18,4 @@ class SearchQuotes extends QuoteFeedEvent {
   List<Object> get props => [query];
 }
 
-class FilterQuotesByCategory extends QuoteFeedEvent {
-  final int categoryId;
 
-  const FilterQuotesByCategory(this.categoryId);
-
-  @override
-  List<Object> get props => [categoryId];
-}

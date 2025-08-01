@@ -75,7 +75,6 @@ The target audience for this application includes:
 *   **Quote Feed:**
     *   Verify that the quote feed is scrollable and loads quotes efficiently.
 *   **Quote Categories:**
-    *   Verify that quotes can be filtered by selecting a category.
 *   **Favorites:**
     *   Verify that a user can add and remove a quote from their favorites.
     *   Verify that favorited quotes appear in the favorites list.

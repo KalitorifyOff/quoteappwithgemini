@@ -27,10 +27,7 @@ class QuoteRepository {
     return allQuotes.where((quote) => quote.isFavorite).toList();
   }
 
-  Future<List<Quote>> getQuotesByCategory(int categoryId) async {
-    final allQuotes = await _dbHelper.getQuotes();
-    return allQuotes.where((quote) => quote.categoryId == categoryId).toList();
-  }
+  
 
   Future<List<Quote>> searchQuotes(String query) async {
     final allQuotes = await _dbHelper.getQuotes();

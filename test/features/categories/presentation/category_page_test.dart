@@ -13,12 +13,10 @@ class MockQuoteFeedBloc extends Mock implements QuoteFeedBloc {}
 
 // Define a fake class for CategoryEvent
 class FakeCategoryEvent extends Fake implements CategoryEvent {}
-class FakeQuoteFeedEvent extends Fake implements QuoteFeedEvent {}
 
 void main() {
   setUpAll(() {
     registerFallbackValue(FakeCategoryEvent());
-    registerFallbackValue(FakeQuoteFeedEvent());
   });
 
   group('CategoryPage', () {
@@ -226,26 +224,6 @@ void main() {
     });
     */
 
-    testWidgets('filters quotes by category on category tap', (tester) async {
-      final categories = [const Category(id: 1, name: 'Category 1')];
-      whenListen(
-        mockCategoryBloc,
-        Stream.fromIterable([
-          CategoryLoaded(categories: categories),
-        ]),
-        initialState: CategoryInitial(),
-      );
-
-      await tester.pumpWidget(createWidgetUnderTest());
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.text('Category 1'));
-      await tester.pumpAndSettle();
-
-      verify(() => mockQuoteFeedBloc.add(const FilterQuotesByCategory(1))).called(1);
-      // Verify that pop is called to navigate back to the feed
-      // This is a bit tricky to test directly without a Navigator observer
-      // For now, we'll rely on the bloc event being dispatched.
-    });
+    
   });
 }

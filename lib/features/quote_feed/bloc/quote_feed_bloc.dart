@@ -12,7 +12,6 @@ class QuoteFeedBloc extends Bloc<QuoteFeedEvent, QuoteFeedState> {
   QuoteFeedBloc({required this.quoteRepository}) : super(QuoteFeedInitial()) {
     on<LoadQuotes>(_onLoadQuotes);
     on<SearchQuotes>(_onSearchQuotes);
-    on<FilterQuotesByCategory>(_onFilterQuotesByCategory);
   }
 
   Future<void> _onLoadQuotes(
@@ -41,16 +40,5 @@ class QuoteFeedBloc extends Bloc<QuoteFeedEvent, QuoteFeedState> {
     }
   }
 
-  Future<void> _onFilterQuotesByCategory(
-    FilterQuotesByCategory event,
-    Emitter<QuoteFeedState> emit,
-  ) async {
-    emit(QuoteFeedLoading());
-    try {
-      final quotes = await quoteRepository.getQuotesByCategory(event.categoryId);
-      emit(QuoteFeedLoaded(quotes: quotes));
-    } catch (e) {
-      emit(QuoteFeedError(message: e.toString()));
-    }
-  }
+  
 }

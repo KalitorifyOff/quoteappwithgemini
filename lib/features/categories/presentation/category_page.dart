@@ -38,12 +38,7 @@ class _CategoryPageState extends State<CategoryPage> {
                 final category = state.categories[index];
                 return ListTile(
                   title: Text(category.name),
-                  onTap: () {
-                    // Filter quotes by category
-                    context.read<QuoteFeedBloc>().add(FilterQuotesByCategory(category.id!));
-                    // Navigate back to the quote feed
-                    Navigator.pop(context);
-                  },
+                  onTap: () {},
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [

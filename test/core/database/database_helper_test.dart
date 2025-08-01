@@ -28,64 +28,64 @@ void main() {
       expect(id, isNotNull);
 
       final quotes = await dbHelper.getQuotes();
-      expect(quotes.length, 1);
-      expect(quotes.first.content, 'Test Quote');
+      expect(quotes.length, 6); // 5 initial quotes + 1 new quote
+      expect(quotes.last.content, 'Test Quote');
     });
 
     test('updateQuote', () async {
-      final quote = Quote(content: 'Test Quote', author: 'Test Author');
-      final id = await dbHelper.insertQuote(quote);
-
-      final updatedQuote = quote.copyWith(id: id, content: 'Updated Quote');
+      // Update one of the initial quotes
+      final initialQuotes = await dbHelper.getQuotes();
+      final quoteToUpdate = initialQuotes.first;
+      final updatedQuote = quoteToUpdate.copyWith(content: 'Updated Quote');
       final rowsAffected = await dbHelper.updateQuote(updatedQuote);
       expect(rowsAffected, 1);
 
       final quotes = await dbHelper.getQuotes();
-      expect(quotes.first.content, 'Updated Quote');
+      expect(quotes.firstWhere((q) => q.id == quoteToUpdate.id).content, 'Updated Quote');
     });
 
     test('deleteQuote', () async {
-      final quote = Quote(content: 'Test Quote', author: 'Test Author');
-      final id = await dbHelper.insertQuote(quote);
-
-      final rowsAffected = await dbHelper.deleteQuote(id);
+      // Delete one of the initial quotes
+      final initialQuotes = await dbHelper.getQuotes();
+      final quoteToDelete = initialQuotes.first;
+      final rowsAffected = await dbHelper.deleteQuote(quoteToDelete.id!);
       expect(rowsAffected, 1);
 
       final quotes = await dbHelper.getQuotes();
-      expect(quotes.length, 0);
+      expect(quotes.length, 4); // 5 initial quotes - 1 deleted
     });
 
     test('insertCategory and getCategories', () async {
-      final category = Category(name: 'Test Category');
+      final category = Category(name: 'New Test Category');
       final id = await dbHelper.insertCategory(category);
       expect(id, isNotNull);
 
       final categories = await dbHelper.getCategories();
-      expect(categories.length, 1);
-      expect(categories.first.name, 'Test Category');
+      expect(categories.length, 5); // 4 initial categories + 1 new category
+      expect(categories.last.name, 'New Test Category');
     });
 
     test('updateCategory', () async {
-      final category = Category(name: 'Test Category');
-      final id = await dbHelper.insertCategory(category);
-
-      final updatedCategory = category.copyWith(id: id, name: 'Updated Category');
+      // Update one of the initial categories
+      final initialCategories = await dbHelper.getCategories();
+      final categoryToUpdate = initialCategories.first;
+      final updatedCategory = categoryToUpdate.copyWith(name: 'Updated Category');
       final rowsAffected = await dbHelper.updateCategory(updatedCategory);
       expect(rowsAffected, 1);
 
       final categories = await dbHelper.getCategories();
-      expect(categories.first.name, 'Updated Category');
+      expect(categories.firstWhere((c) => c.id == categoryToUpdate.id).name, 'Updated Category');
     });
 
     test('deleteCategory', () async {
-      final category = Category(name: 'Test Category');
-      final id = await dbHelper.insertCategory(category);
-
-      final rowsAffected = await dbHelper.deleteCategory(id);
+      // Delete one of the initial categories
+      final initialCategories = await dbHelper.getCategories();
+      final categoryToDelete = initialCategories.first;
+      final rowsAffected = await dbHelper.deleteCategory(categoryToDelete.id!);
       expect(rowsAffected, 1);
 
       final categories = await dbHelper.getCategories();
-      expect(categories.length, 0);
+      expect(categories.length, 3); // 4 initial categories - 1 deleted
     });
 
     test('insertUserStreak and getUserStreak', () async {
