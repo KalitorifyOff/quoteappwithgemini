@@ -3,6 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:streakdemo/core/database/models/quote.dart';
 import 'package:streakdemo/core/database/repositories/quote_repository.dart';
 
+import 'dart:math';
+
 part 'quote_of_the_day_event.dart';
 part 'quote_of_the_day_state.dart';
 
@@ -21,8 +23,9 @@ class QuoteOfTheDayBloc extends Bloc<QuoteOfTheDayEvent, QuoteOfTheDayState> {
     try {
       final quotes = await quoteRepository.getQuotes();
       if (quotes.isNotEmpty) {
-        // For now, just pick the first quote. Later, we'll implement daily logic.
-        emit(QuoteOfTheDayLoaded(quote: quotes.first));
+        final random = Random();
+        final randomIndex = random.nextInt(quotes.length);
+        emit(QuoteOfTheDayLoaded(quote: quotes[randomIndex]));
       } else {
         emit(const QuoteOfTheDayError(message: 'No quotes available.'));
       }

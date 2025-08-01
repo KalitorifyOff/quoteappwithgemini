@@ -61,6 +61,63 @@ class DatabaseHelper {
       )
       ''',
     );
+    await _populateInitialData(db);
+  }
+
+  Future<void> _populateInitialData(Database db) async {
+    // Check if categories table is empty
+    var count = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM categories'));
+    if (count == 0) {
+      await db.insert('categories', {'name': 'Inspirational'});
+      await db.insert('categories', {'name': 'Motivational'});
+      await db.insert('categories', {'name': 'Wisdom'});
+      await db.insert('categories', {'name': 'Humor'});
+    }
+
+    // Check if quotes table is empty
+    count = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM quotes'));
+    if (count == 0) {
+      // Get category IDs
+      final List<Map<String, dynamic>> categories = await db.query('categories');
+      final inspirationalId = categories.firstWhere((cat) => cat['name'] == 'Inspirational')['id'];
+      final motivationalId = categories.firstWhere((cat) => cat['name'] == 'Motivational')['id'];
+      final wisdomId = categories.firstWhere((cat) => cat['name'] == 'Wisdom')['id'];
+
+      await db.insert('quotes', {
+        'content': 'The only way to do great work is to love what you do.',
+        'author': 'Steve Jobs',
+        'category_id': inspirationalId,
+      });
+      await db.insert('quotes', {
+        'content': 'Believe you can and you\'re halfway there.',
+        'author': 'Theodore Roosevelt',
+        'category_id': motivationalId,
+      });
+      await db.insert('quotes', {
+        'content': 'The unexamined life is not worth living.',
+        'author': 'Socrates',
+        'category_id': wisdomId,
+      });
+      await db.insert('quotes', {
+        'content': 'The future belongs to those who believe in the beauty of their dreams.',
+        'author': 'Eleanor Roosevelt',
+        'category_id': inspirationalId,
+      });
+      await db.insert('quotes', {
+        'content': 'It is during our darkest moments that we must focus to see the light.',
+        'author': 'Aristotle',
+        'category_id': wisdomId,
+      });
+    }
+
+    // Check if user_streak table is empty
+    count = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM user_streak'));
+    if (count == 0) {
+      await db.insert('user_streak', {
+        'last_accessed': DateTime.now().toIso8601String(),
+        'streak_count': 0,
+      });
+    }
   }
 
   // Quote operations
