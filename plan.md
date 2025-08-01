@@ -7,7 +7,7 @@ This document outlines the development steps for the Positive Quote App, based o
 3. [x] Set up the feature-first project structure.
 4. [x] Configure the soft and cream color palette for both light and dark themes.
 5. [ ] Set up internationalization (i18n) with initial language files (Removed for now).
-6. [ ] Define the database schema for quotes, categories, and user data.
+6. [x] Define the database schema for quotes, categories, and user data.
 7. [ ] Implement the database helper/service class.
 8. [ ] Create `Quote` and `Category` models.
 9. [ ] Implement Data Access Objects (DAOs)/repositories for quotes, categories, and favorites.
