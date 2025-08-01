@@ -60,12 +60,20 @@ class MyApp extends StatelessWidget {
           create: (context) => StreakBloc(userStreakRepository: userStreakRepository),
         ),
       ],
-      child: MaterialApp(
-        title: 'Positive Quote App',
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.system, // Automatically switch between light and dark theme
-        home: hasCompletedOnboarding ? const HomePage() : const OnboardingPage(),
+      child: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (context, themeState) {
+          ThemeMode currentThemeMode = ThemeMode.system;
+          if (themeState is ThemeLoaded) {
+            currentThemeMode = themeState.themeMode;
+          }
+          return MaterialApp(
+            title: 'Positive Quote App',
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: currentThemeMode,
+            home: hasCompletedOnboarding ? const HomePage() : const OnboardingPage(),
+          );
+        },
       ),
     );
   }

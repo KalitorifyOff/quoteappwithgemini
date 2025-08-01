@@ -27,7 +27,7 @@ This document outlines the development steps for the Positive Quote App, based o
 23. [x] Develop a home screen "Widget" for the daily quote. (Flutter UI component implemented; native integration requires platform-specific code outside CLI scope)
 24. [ ] Implement "Multilingual Support" with a language switcher.
 25. [x] Develop the "Onboarding" screen for new users.
-26. [ ] Implement the "Light/Dark Theme" switcher.
+26. [x] Implement the "Light/Dark Theme" switcher.
 27. [ ] Add animations and refine the overall UI.
 28. [ ] Write unit and widget tests.
 29. [ ] Perform manual testing based on `PRD.md`.
