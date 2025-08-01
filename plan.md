@@ -11,7 +11,7 @@ This document outlines the development steps for the Positive Quote App, based o
 7. [x] Implement the database helper/service class.
 8. [x] Create `Quote` and `Category` models.
 9. [x] Implement Data Access Objects (DAOs)/repositories for quotes, categories, and favorites.
-10. [ ] Implement BLoC and UI for the "Quote of the Day" feature.
+10. [x] Implement BLoC and UI for the "Quote of the Day" feature.
 11. [ ] Implement BLoC and UI for the scrollable "Quote Feed".
 12. [ ] Implement BLoC and UI for "Quote Categories" and filtering.
 13. [ ] Implement BLoC and UI for the "Favorites" feature.
