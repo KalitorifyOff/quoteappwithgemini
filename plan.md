@@ -18,8 +18,8 @@ This document outlines the development steps for the Positive Quote App, based o
 14. [ ] Implement BLoC and UI for the "Search" functionality.
 15. [x] Implement BLoC for managing user-created quotes and categories.
 16. [x] Develop UI for creating, editing, and managing user quotes.
-17. [ ] Develop UI for creating, editing, and managing user categories.
-18. [ ] Implement BLoC and logic for "Streak Management".
+17. [x] Develop UI for creating, editing, and managing user categories.
+18. [x] Implement BLoC and logic for "Streak Management".
 19. [ ] Develop UI to display the streak counter.
 20. [ ] Implement logic and UI for "Streak Rewards".
 21. [ ] Implement "Daily Reminders" using local notifications.
