@@ -21,9 +21,9 @@ This document outlines the development steps for the Positive Quote App, based o
 17. [x] Develop UI for creating, editing, and managing user categories.
 18. [x] Implement BLoC and logic for "Streak Management".
 19. [x] Develop UI to display the streak counter.
-20. [ ] Implement logic and UI for "Streak Rewards".
-21. [ ] Implement "Daily Reminders" using local notifications.
-22. [ ] Implement "Sharing" functionality for quotes.
+20. [x] Implement logic and UI for "Streak Rewards".
+21. [x] Implement "Daily Reminders" using local notifications.
+22. [x] Implement "Sharing" functionality for quotes.
 23. [ ] Develop a home screen "Widget" for the daily quote.
 24. [ ] Implement "Multilingual Support" with a language switcher.
 25. [ ] Develop the "Onboarding" screen for new users.

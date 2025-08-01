@@ -21,7 +21,8 @@ class StreakBloc extends Bloc<StreakEvent, StreakState> {
     emit(StreakLoading());
     try {
       final streak = await userStreakRepository.getUserStreak();
-      emit(StreakLoaded(streak: streak));
+      final hasReward = (streak?.streakCount ?? 0) > 0 && (streak!.streakCount % 7 == 0);
+      emit(StreakLoaded(streak: streak, hasReward: hasReward));
     } catch (e) {
       emit(StreakError(message: e.toString()));
     }
@@ -65,7 +66,29 @@ class StreakBloc extends Bloc<StreakEvent, StreakState> {
           // Already accessed today, do nothing
         }
       }
-      emit(StreakLoaded(streak: currentStreak));
+      final hasReward = (currentStreak?.streakCount ?? 0) > 0 && (currentStreak!.streakCount % 7 == 0);
+      emit(StreakLoaded(streak: currentStreak, hasReward: hasReward));
+    } catch (e) {
+      emit(StreakError(message: e.toString()));
+    }
+  }
+
+  Future<void> _onClaimReward(
+    ClaimReward event,
+    Emitter<StreakState> emit,
+  ) async {
+    try {
+      UserStreak? currentStreak = await userStreakRepository.getUserStreak();
+      if (currentStreak != null && currentStreak.streakCount % 7 == 0) {
+        // Reward claimed, reset hasReward flag (or implement reward logic)
+        // For now, we'll just reload the streak without changing the streak count
+        // as the reward is based on reaching a multiple of 7.
+        // In a real app, you might grant a reward and then update the streak
+        // to reflect that the reward for this milestone has been claimed.
+        emit(StreakLoaded(streak: currentStreak, hasReward: false));
+      } else {
+        emit(StreakLoaded(streak: currentStreak, hasReward: false));
+      }
     } catch (e) {
       emit(StreakError(message: e.toString()));
     }

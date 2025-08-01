@@ -13,11 +13,12 @@ class StreakLoading extends StreakState {}
 
 class StreakLoaded extends StreakState {
   final UserStreak? streak;
+  final bool hasReward;
 
-  const StreakLoaded({this.streak});
+  const StreakLoaded({this.streak, this.hasReward = false});
 
   @override
-  List<Object?> get props => [streak];
+  List<Object?> get props => [streak, hasReward];
 }
 
 class StreakError extends StreakState {

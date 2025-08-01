@@ -48,6 +48,25 @@ class QuoteOfTheDayPage extends StatelessWidget {
         },
         child: const Icon(Icons.refresh),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 8.0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.share),
+              onPressed: () {
+                final state = context.read<QuoteOfTheDayBloc>().state;
+                if (state is QuoteOfTheDayLoaded) {
+                  Share.share('"${state.quote.content}" - ${state.quote.author}');
+                }
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

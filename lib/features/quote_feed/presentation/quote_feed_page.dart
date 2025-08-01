@@ -50,6 +50,15 @@ class _QuoteFeedPageState extends State<QuoteFeedPage> {
                           '- ${quote.author}',
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: IconButton(
+                            icon: const Icon(Icons.share),
+                            onPressed: () {
+                              Share.share('"${quote.content}" - ${quote.author}');
+                            },
+                          ),
+                        ),
                       ],
                     ),
                   ),

@@ -10,8 +10,11 @@ import 'package:streakdemo/features/quote_of_the_day/bloc/quote_of_the_day_bloc.
 import 'package:streakdemo/features/quote_of_the_day/presentation/quote_of_the_day_page.dart';
 import 'package:streakdemo/features/quote_feed/bloc/quote_feed_bloc.dart';
 import 'package:streakdemo/features/quote_feed/presentation/quote_feed_page.dart';
+import 'package:streakdemo/core/services/notification_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService().init();
   runApp(const MyApp());
 }
 
@@ -88,6 +91,10 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.category),
             label: 'Categories',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
           ),
         ],
         currentIndex: _selectedIndex,

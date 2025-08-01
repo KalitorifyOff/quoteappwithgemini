@@ -10,3 +10,5 @@ abstract class StreakEvent extends Equatable {
 class LoadStreak extends StreakEvent {}
 
 class UpdateStreak extends StreakEvent {}
+
+class ClaimReward extends StreakEvent {}
